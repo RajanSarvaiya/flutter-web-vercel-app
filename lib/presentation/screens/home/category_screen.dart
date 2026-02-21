@@ -139,35 +139,39 @@ class _CategoryScreenState extends State<CategoryScreen> {
             // Empty state
             if (provider.displayedProducts.isEmpty && !provider.isInitialLoading)
               SliverFillRemaining(
+                hasScrollBody: false,
                 child: Center(
-                  child: FadeSlideAnimation(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.search_off_rounded,
-                            size: 48, color: AppColors.grey400),
-                        SizedBox(height: 16),
-                        Text(
-                          'No products found',
-                          style: GoogleFonts.poppins(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 40),
+                    child: FadeSlideAnimation(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.search_off_rounded,
+                              size: 48, color: AppColors.grey400),
+                          SizedBox(height: 16),
+                          Text(
+                            'No products found',
+                            style: GoogleFonts.poppins(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Try adjusting your filters',
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            color: AppColors.grey500,
+                          SizedBox(height: 8),
+                          Text(
+                            'Try adjusting your filters',
+                            style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              color: AppColors.grey500,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 24),
-                        OutlinedButton(
-                          onPressed: provider.clearFilters,
-                          child: const Text('CLEAR FILTERS'),
-                        ),
-                      ],
+                          SizedBox(height: 24),
+                          OutlinedButton(
+                            onPressed: provider.clearFilters,
+                            child: const Text('CLEAR FILTERS'),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
