@@ -1,13 +1,18 @@
 #!/bin/bash
 
-# 1. Clone Flutter SDK
-git clone https://github.com/flutter/flutter.git -b stable
+# 1. Clone Flutter SDK (Shallow clone for speed)
+if [ ! -d "flutter" ]; then
+  echo "Cloning Flutter SDK..."
+  git clone https://github.com/flutter/flutter.git -b stable --depth 1
+fi
 
-# 2. Add Flutter to PATH
-export PATH="$PATH:`pwd`/flutter/bin"
+# 2. Set explicit Flutter path
+FLUTTER_BIN="$(pwd)/flutter/bin/flutter"
 
 # 3. Enable Web Support
-flutter config --enable-web
+echo "Setting up Flutter..."
+$FLUTTER_BIN config --enable-web
 
 # 4. Build the Web App
-flutter build web --release
+echo "Starting build..."
+$FLUTTER_BIN build web --release
