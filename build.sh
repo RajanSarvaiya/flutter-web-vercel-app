@@ -1,14 +1,14 @@
 #!/bin/bash
 set -e
 
-# Detect if Flutter is installed; if not, download and install Flutter SDK automatically
-if [ ! -d "$HOME/flutter" ]; then
-  echo "Flutter SDK not found. Installing..."
-  git clone https://github.com/flutter/flutter.git -b stable $HOME/flutter --depth 1
+# Detect if Flutter is installed in the current directory
+if [ ! -d "./flutter" ]; then
+  echo "Flutter SDK not found locally. Installing..."
+  git clone https://github.com/flutter/flutter.git -b stable ./flutter --depth 1
 fi
 
-# Add Flutter to the PATH
-export PATH="$PATH:$HOME/flutter/bin"
+# Add Flutter to the PATH (using local directory)
+export PATH="$PATH:$(pwd)/flutter/bin"
 
 # Verify Flutter installation
 flutter --version
