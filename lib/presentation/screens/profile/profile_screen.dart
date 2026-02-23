@@ -77,7 +77,7 @@ class ProfileScreen extends StatelessWidget {
                       icon: Icons.shopping_bag_outlined,
                       title: 'My Orders',
                       subtitle: 'Track your order history',
-                      onTap: () {},
+                      onTap: () => context.push('/profile/orders'),
                     ),
                     _ProfileTile(
                       icon: Icons.favorite_outline,
@@ -89,7 +89,7 @@ class ProfileScreen extends StatelessWidget {
                       icon: Icons.location_on_outlined,
                       title: 'Addresses',
                       subtitle: 'Manage delivery addresses',
-                      onTap: () {},
+                      onTap: () => context.push('/profile/addresses'),
                     ),
                     _ProfileTile(
                       icon: Icons.credit_card_outlined,

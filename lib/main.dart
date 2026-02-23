@@ -5,6 +5,8 @@ import '../providers/product_provider.dart';
 import '../providers/cart_provider.dart';
 import '../providers/wishlist_provider.dart';
 import '../providers/navigation_provider.dart';
+import '../providers/address_provider.dart';
+import '../providers/order_provider.dart';
 import 'app/theme/app_theme.dart';
 import 'app/routes/app_router.dart';
 
@@ -24,6 +26,8 @@ class KiteCoApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => WishlistProvider()),
         ChangeNotifierProvider(create: (_) => NavigationProvider()),
+        ChangeNotifierProvider(create: (_) => AddressProvider()),
+        ChangeNotifierProvider(create: (_) => OrderProvider()),
       ],
       child: _AppWidget(),
     );

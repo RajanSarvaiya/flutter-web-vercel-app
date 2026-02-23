@@ -6,6 +6,8 @@ import '../../presentation/screens/product/product_detail_screen.dart';
 import '../../presentation/screens/cart/cart_screen.dart';
 import '../../presentation/screens/wishlist/wishlist_screen.dart';
 import '../../presentation/screens/profile/profile_screen.dart';
+import '../../presentation/screens/profile/addresses_screen.dart';
+import '../../presentation/screens/profile/orders_screen.dart';
 import '../../presentation/screens/auth/login_screen.dart';
 import '../../presentation/screens/auth/signup_screen.dart';
 import '../../presentation/screens/home/category_screen.dart';
@@ -97,6 +99,24 @@ GoRouter createRouter() {
                   child: const ProfileScreen(),
                   transitionsBuilder: _fadeTransition,
                 ),
+                routes: [
+                  GoRoute(
+                    path: 'addresses',
+                    pageBuilder: (context, state) => CustomTransitionPage(
+                      key: state.pageKey,
+                      child: const AddressesScreen(),
+                      transitionsBuilder: _slideTransition,
+                    ),
+                  ),
+                  GoRoute(
+                    path: 'orders',
+                    pageBuilder: (context, state) => CustomTransitionPage(
+                      key: state.pageKey,
+                      child: const OrdersScreen(),
+                      transitionsBuilder: _slideTransition,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

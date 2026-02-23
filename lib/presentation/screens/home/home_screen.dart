@@ -725,7 +725,7 @@ class _CategorySidePanel extends StatelessWidget {
         child: Center(
           child: 
           Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
