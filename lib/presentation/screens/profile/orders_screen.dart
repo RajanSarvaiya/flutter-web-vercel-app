@@ -14,7 +14,7 @@ class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: AppColors.white,
         elevation: 0,
@@ -26,28 +26,37 @@ class OrdersScreen extends StatelessWidget {
             color: AppColors.black,
           ),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_rounded, color: AppColors.black),
-          onPressed: () => context.pop(),
-        ),
+        automaticallyImplyLeading: false,
       ),
-      body: Consumer<OrderProvider>(
-        builder: (context, orderProvider, _) {
-          if (orderProvider.orders.isEmpty) {
-            return _buildEmptyState();
-          }
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          color: AppColors.white,
+          image: DecorationImage(
+            image: AssetImage('assets/images/bg_paper_texture.png'),
+            fit: BoxFit.cover,
+            opacity: 0.4,
+          ),
+        ),
+        child: Consumer<OrderProvider>(
+          builder: (context, orderProvider, _) {
+            if (orderProvider.orders.isEmpty) {
+              return _buildEmptyState();
+            }
 
-          return FadeSlideAnimation(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-              itemCount: orderProvider.orders.length,
-              itemBuilder: (context, index) {
-                final order = orderProvider.orders[index];
-                return OrderCard(order: order);
-              },
-            ),
-          );
-        },
+            return FadeSlideAnimation(
+              child: ListView.builder(
+                padding: const EdgeInsets.fromLTRB(24, 100, 24, 32),
+                itemCount: orderProvider.orders.length,
+                itemBuilder: (context, index) {
+                  final order = orderProvider.orders[index];
+                  return OrderCard(order: order);
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }

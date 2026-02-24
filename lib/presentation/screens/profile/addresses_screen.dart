@@ -9,7 +9,8 @@ import '../../../providers/address_provider.dart';
 import 'widgets/add_address_dialog.dart';
 
 class AddressesScreen extends StatelessWidget {
-  const AddressesScreen({super.key});
+  final bool isSelectionMode;
+  const AddressesScreen({super.key, this.isSelectionMode = false});
 
   void _showAddressOptions(BuildContext context, Address address) {
     showModalBottomSheet(
@@ -143,7 +144,7 @@ class AddressesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: AppColors.white,
         elevation: 0,
@@ -155,28 +156,37 @@ class AddressesScreen extends StatelessWidget {
             color: AppColors.black,
           ),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_rounded, color: AppColors.black),
-          onPressed: () => context.pop(),
-        ),
+        automaticallyImplyLeading: false,
       ),
-      body: Consumer<AddressProvider>(
-        builder: (context, addressProvider, _) {
-          if (addressProvider.addresses.isEmpty) {
-            return _buildEmptyState(context);
-          }
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          color: AppColors.white,
+          image: DecorationImage(
+            image: AssetImage('assets/images/bg_paper_texture.png'),
+            fit: BoxFit.cover,
+            opacity: 0.4,
+          ),
+        ),
+        child: Consumer<AddressProvider>(
+          builder: (context, addressProvider, _) {
+            if (addressProvider.addresses.isEmpty) {
+              return _buildEmptyState(context);
+            }
 
-          return FadeSlideAnimation(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(24),
-              itemCount: addressProvider.addresses.length,
-              itemBuilder: (context, index) {
-                final address = addressProvider.addresses[index];
-                return _buildAddressCard(context, address);
-              },
-            ),
-          );
-        },
+            return FadeSlideAnimation(
+              child: ListView.builder(
+                padding: const EdgeInsets.fromLTRB(24, 100, 24, 100),
+                itemCount: addressProvider.addresses.length,
+                itemBuilder: (context, index) {
+                  final address = addressProvider.addresses[index];
+                  return _buildAddressCard(context, address);
+                },
+              ),
+            );
+          },
+        ),
       ),
       floatingActionButton: Consumer<AddressProvider>(
         builder: (context, addressProvider, _) {

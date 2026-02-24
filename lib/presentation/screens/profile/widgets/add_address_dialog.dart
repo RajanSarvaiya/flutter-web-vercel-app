@@ -129,7 +129,7 @@ class _AddAddressDialogState extends State<AddAddressDialog> {
       addressProvider.addAddress(address);
     }
 
-    Navigator.of(context).pop();
+    Navigator.of(context).pop(address);
   }
 
   @override

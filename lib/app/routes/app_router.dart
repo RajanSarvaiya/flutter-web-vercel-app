@@ -11,6 +11,9 @@ import '../../presentation/screens/profile/orders_screen.dart';
 import '../../presentation/screens/auth/login_screen.dart';
 import '../../presentation/screens/auth/signup_screen.dart';
 import '../../presentation/screens/home/category_screen.dart';
+import '../../presentation/screens/profile/help_support_screen.dart';
+import '../../presentation/screens/profile/settings_screen.dart';
+import '../../presentation/screens/checkout/checkout_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -102,11 +105,14 @@ GoRouter createRouter() {
                 routes: [
                   GoRoute(
                     path: 'addresses',
-                    pageBuilder: (context, state) => CustomTransitionPage(
-                      key: state.pageKey,
-                      child: const AddressesScreen(),
-                      transitionsBuilder: _slideTransition,
-                    ),
+                    pageBuilder: (context, state) {
+                      final isSelection = state.uri.queryParameters['selection'] == 'true';
+                      return CustomTransitionPage(
+                        key: state.pageKey,
+                        child: AddressesScreen(isSelectionMode: isSelection),
+                        transitionsBuilder: _slideTransition,
+                      );
+                    },
                   ),
                   GoRoute(
                     path: 'orders',
@@ -116,11 +122,45 @@ GoRouter createRouter() {
                       transitionsBuilder: _slideTransition,
                     ),
                   ),
+                  GoRoute(
+                    path: 'help-support',
+                    pageBuilder: (context, state) => CustomTransitionPage(
+                      key: state.pageKey,
+                      child: const HelpSupportScreen(),
+                      transitionsBuilder: _slideTransition,
+                    ),
+                  ),
+                  GoRoute(
+                    path: 'settings',
+                    pageBuilder: (context, state) => CustomTransitionPage(
+                      key: state.pageKey,
+                      child: const SettingsScreen(),
+                      transitionsBuilder: _slideTransition,
+                    ),
+                  ),
                 ],
               ),
             ],
           ),
         ],
+      ),
+      GoRoute(
+        path: '/checkout',
+        parentNavigatorKey: _rootNavigatorKey,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const CheckoutScreen(),
+          transitionsBuilder: _slideUpTransition,
+        ),
+      ),
+      GoRoute(
+        path: '/select-address',
+        parentNavigatorKey: _rootNavigatorKey,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const AddressesScreen(isSelectionMode: true),
+          transitionsBuilder: _slideTransition,
+        ),
       ),
       // Auth routes (outside shell - no bottom nav)
       GoRoute(

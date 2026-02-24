@@ -24,40 +24,21 @@ class WishlistScreen extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverPadding(
-          padding: EdgeInsets.symmetric(
-            horizontal: isMobile ? 16.0 : 32.0,
-            vertical: 24,
+          padding: EdgeInsets.fromLTRB(
+            isMobile ? 16.0 : 32.0,
+            24,
+            isMobile ? 16.0 : 32.0,
+            16,
           ),
           sliver: SliverToBoxAdapter(
             child: FadeSlideAnimation(
-              child: Row(
-                children: [
-                  Text(
-                    'My Wishlist',
-                    style: GoogleFonts.poppins(
-                      fontSize: isMobile ? 22.0 : 28.0,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.black,
-                    ),
-                  ),
-                  SizedBox(width: 12),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: AppColors.grey100,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      '${wishlist.itemCount} items',
-                      style: GoogleFonts.poppins(
-                        fontSize: 12,
-                        color: AppColors.grey600,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ],
+              child: Text(
+                'My Wishlist',
+                style: GoogleFonts.poppins(
+                  fontSize: isMobile ? 22.0 : 28.0,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.black,
+                ),
               ),
             ),
           ),
